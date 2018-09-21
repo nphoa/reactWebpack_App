@@ -7,10 +7,12 @@ import {Redirect} from 'react-router-dom';
 import MenuPage from './Partial/Menu.Page';
 import FooterPage from './Partial/Footer.Page';
 import HeaderPage from './Partial/Header.Page';
-import '../public/js/Custom/customLayout';
+//import '../public/js/Custom/customLayout';
+
 
 class LayoutPage extends Component {
   render() {
+    console.log('render 1');
     const {isLogin} = this.props;
     if(!isLogin){
       return(
@@ -19,7 +21,7 @@ class LayoutPage extends Component {
     }
     return (
       <div>
-
+       
         <div className="wrapper">
           {/* Sidebar Holder */}
           <MenuPage/>

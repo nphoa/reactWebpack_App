@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 
+
+
 class HeaderPage extends Component {
+    constructor(props){
+      super(props);
+    }
+   
+    toggleMenu(){
+      $('#sidebar').toggleClass('active');
+    }
+    
     render(){
         return(
             <nav className="navbar navbar-default mb-xl-5 mb-4">
             <div className="container-fluid">
               <div className="navbar-header">
-                <button type="button" id="sidebarCollapse" className="btn btn-info navbar-btn">
+                <button type="button" id="sidebarCollapse" onClick={this.toggleMenu} className="btn btn-info navbar-btn">
                   <i className="fas fa-bars" />
                 </button>
               </div>
@@ -18,7 +28,7 @@ class HeaderPage extends Component {
               {/*// Search-from */}
               <ul className="top-icons-agileits-w3layouts float-right">
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="far fa-bell" />
                     <span className="badge">4</span>
                   </a>

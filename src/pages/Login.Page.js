@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from './../actions/index';
 
 class LoginPage extends Component {
   constructor(props){
@@ -20,7 +21,7 @@ class LoginPage extends Component {
   onSubmitForm = (event) => {
     event.preventDefault();
     console.log(this.state);
-    //this.props.login(this.state);
+    this.props.login(this.state);
   }
   render() {
     const { isLogin } = this.props;
