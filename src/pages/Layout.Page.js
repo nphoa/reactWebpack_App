@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect,Route} from 'react-router-dom';
 
 
 
 import MenuPage from './Partial/Menu.Page';
 import FooterPage from './Partial/Footer.Page';
 import HeaderPage from './Partial/Header.Page';
-//import '../public/js/Custom/customLayout';
 
 
+ 
 class LayoutPage extends Component {
+  constructor(props){
+    super(props);
+  }
+  showContentRoute = (routes) =>{
+    
+    var result = null;
+    if(routes.length >0){
+        result = routes.map((route,index)=>{
+            return (
+                <Route
+                    key = {index} 
+                    path={route.path}
+                    exact={route.exact}
+                    render={props => (
+                      // pass the sub-routes down to keep nesting
+                      <route.component {...props} routes={route.routes} />
+                    )}  
+                />
+            );
+        });
+    }
+    return result;
+  }
   render() {
-    console.log('render 1');
     const {isLogin} = this.props;
     if(!isLogin){
       return(
@@ -35,7 +57,7 @@ class LayoutPage extends Component {
                 {/* Stats */}
                 <div className="outer-w3-agile col-xl">
                       
-                  
+                {this.showContentRoute(this.props.routes)}
 
 
 

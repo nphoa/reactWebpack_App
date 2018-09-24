@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
-
-
+import {connect} from 'react-redux';
+import * as actions from '../../actions/index';
 class HeaderPage extends Component {
     constructor(props){
       super(props);
@@ -10,7 +9,26 @@ class HeaderPage extends Component {
     toggleMenu(){
       $('#sidebar').toggleClass('active');
     }
-    
+    onBlurEvent(){
+      
+      $(document).ready(function () {
+        $(".dropdown").hover(
+          function () {
+            $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+            $(this).toggleClass('open');
+          },
+          function () {
+            $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+            $(this).toggleClass('open');
+          }
+      
+        );
+      
+     
+      
+      });
+      
+    }
     render(){
         return(
             <nav className="navbar navbar-default mb-xl-5 mb-4">
@@ -44,36 +62,8 @@ class HeaderPage extends Component {
                         <h6>4 mins ago</h6>
                       </div>
                     </a>
-                    <a href="#" className="dropdown-item mt-3">
-                      <div className="notif-img-agileinfo">
-                        <img src="images/clone.jpg" className="img-fluid" alt="Responsive image" />
-                      </div>
-                      <div className="notif-content-wthree">
-                        <p className="paragraph-agileits-w3layouts py-2">
-                          <span className="text-diff">Diana</span> Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                        <h6>6 mins ago</h6>
-                      </div>
-                    </a>
-                    <a href="#" className="dropdown-item mt-3">
-                      <div className="notif-img-agileinfo">
-                        <img src="images/clone.jpg" className="img-fluid" alt="Responsive image" />
-                      </div>
-                      <div className="notif-content-wthree">
-                        <p className="paragraph-agileits-w3layouts py-2">
-                          <span className="text-diff">Steffie</span> Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                        <h6>12 mins ago</h6>
-                      </div>
-                    </a>
-                    <a href="#" className="dropdown-item mt-3">
-                      <div className="notif-img-agileinfo">
-                        <img src="images/clone.jpg" className="img-fluid" alt="Responsive image" />
-                      </div>
-                      <div className="notif-content-wthree">
-                        <p className="paragraph-agileits-w3layouts py-2">
-                          <span className="text-diff">Jack</span> Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                        <h6>1 days ago</h6>
-                      </div>
-                    </a>
+                    
+                    
                     <div className="dropdown-divider" />
                     <a className="dropdown-item" href="#">view all notifications</a>
                   </div>
@@ -137,14 +127,33 @@ class HeaderPage extends Component {
                         <i className="far fa-thumbs-up mr-3" />Support</h4>
                     </a>
                     <div className="dropdown-divider" />
-                    <a className="dropdown-item" href="login.html">Logout</a>
+                    <a className="dropdown-item" href="" onClick={this.props.logout}>Logout</a>
                   </div>
                 </li>
               </ul>
+              {this.onBlurEvent()}
             </div>
           </nav>
         )
     }
 }
 
-export default HeaderPage
+
+//export default HeaderPage
+
+const mapStateToProps = (state) => {
+  return {
+    isLogin:state.authencationReducer.isLogin
+  }
+}
+
+const mapDispatchToProps = (dispatch,state) => {
+  return {
+    logout:()=>{
+      dispatch(actions.logout())
+    }
+  }
+   
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(HeaderPage);

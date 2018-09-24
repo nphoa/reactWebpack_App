@@ -3,7 +3,7 @@ import HomePage from './pages/HomePage/HomePage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import LayoutPage from './pages/Layout.Page';
 import LoginPage from './pages/Login.Page';
-
+import KeywordsContainer from './containers/keywords.Container';
 
 const routers = [
     {
@@ -25,11 +25,11 @@ const routers = [
                 exact:true,
                 component:HomePage
             },
-            // {
-            //     path:'/keywords',
-            //     exact:true,
-            //     component:KeywordsContainer
-            // },
+            {
+                path:'/keywords',
+                exact:true,
+                component:KeywordsContainer
+            },
             // {
             //     path:'/addKeyword/:id?',
             //     exact:true,

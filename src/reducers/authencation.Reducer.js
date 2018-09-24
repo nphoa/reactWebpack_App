@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 
 var initialState  = {
-	isLogin:true,
+	isLogin:false,
 	login:{
 		email:'',
 		password:''
@@ -16,16 +16,16 @@ var myReducer = (state = initialState,action) => {
 			sessionStorage.setItem('userInfo',JSON.stringify(action.login.user));
 			return {...state};
 			break;
-		// case types.LOGOUT:
-		// 	state.isLogin = false;
-		// 	sessionStorage.clear();
-		// 	state.login = {};
-		// 	return {...state};
-		// 	break;
+		case types.LOGOUT:
+			state.isLogin = false;
+			sessionStorage.clear();
+			state.login = {};
+			return {...state};
+			break;
 			
 		default:
 			//console.log(api.getAllProduct());
-			//state.isLogin = (sessionStorage.getItem('userInfo')) ? true :false;
+			state.isLogin = (sessionStorage.getItem('userInfo')) ? true :false;
 			return {...state};
 			break;
 	}
