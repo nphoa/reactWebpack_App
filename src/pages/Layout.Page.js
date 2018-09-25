@@ -52,17 +52,17 @@ class LayoutPage extends Component {
             {/* top-bar */}
             <HeaderPage/>
             {/*// top-bar */}
-            <div className="container-fluid">
+            <div className="container-fluid" style={{marginBottom:'50vh'}}>
               <div className="row">
                 {/* Stats */}
-                <div className="outer-w3-agile col-xl">
+               
                       
                 {this.showContentRoute(this.props.routes)}
 
 
 
 
-                </div>
+               
 
               </div>
             </div>

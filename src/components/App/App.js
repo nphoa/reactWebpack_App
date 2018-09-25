@@ -10,9 +10,12 @@ import '../../public/css/style4.css';
 import '../../public/css/fontawesome-all.css';
 import '../../public/js/script';
 import 'bootstrap/dist/js/bootstrap.min.js';
-
-
+import WOW from 'wow.js';
+import 'animate.css';
 class App extends Component {
+    componentWillMount(){
+        new WOW().init(); 
+    }
     showContentRoute = (routes) => {
 
         var result = null;

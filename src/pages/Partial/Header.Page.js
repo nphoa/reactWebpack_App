@@ -30,6 +30,7 @@ class HeaderPage extends Component {
       
     }
     render(){
+        let userInfo =(sessionStorage.getItem('userInfo')) ? JSON.parse(sessionStorage.getItem('userInfo')) : '';
         return(
             <nav className="navbar navbar-default mb-xl-5 mb-4">
             <div className="container-fluid">
@@ -68,30 +69,6 @@ class HeaderPage extends Component {
                     <a className="dropdown-item" href="#">view all notifications</a>
                   </div>
                 </li>
-                <li className="nav-item dropdown mx-3">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i className="fas fa-spinner" />
-                  </a>
-                  <div className="dropdown-menu top-grid-scroll drop-2">
-                    <h3 className="sub-title-w3-agileits">Shortcuts</h3>
-                    <a href="#" className="dropdown-item mt-3">
-                      <h4>
-                        <i className="fas fa-chart-pie mr-3" />Sed feugiat</h4>
-                    </a>
-                    <a href="#" className="dropdown-item mt-3">
-                      <h4>
-                        <i className="fab fa-connectdevelop mr-3" />Aliquam sed</h4>
-                    </a>
-                    <a href="#" className="dropdown-item mt-3">
-                      <h4>
-                        <i className="fas fa-tasks mr-3" />Lorem ipsum</h4>
-                    </a>
-                    <a href="#" className="dropdown-item mt-3">
-                      <h4>
-                        <i className="fab fa-superpowers mr-3" />Cras rutrum</h4>
-                    </a>
-                  </div>
-                </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="far fa-user" />
@@ -102,8 +79,8 @@ class HeaderPage extends Component {
                         <img src="images/profile.jpg" className="img-fluid mb-3" alt="Responsive image" />
                       </div>
                       <div className="profile-r align-self-center">
-                        <h3 className="sub-title-w3-agileits">Will Smith</h3>
-                        <a href="mailto:info@example.com">info@example.com</a>
+                        <h3 className="sub-title-w3-agileits">{userInfo.name}</h3>
+                        <a href="mailto:info@example.com">{userInfo.email}</a>
                       </div>
                     </div>
                     <a href="#" className="dropdown-item mt-3">

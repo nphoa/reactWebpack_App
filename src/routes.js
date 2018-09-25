@@ -4,6 +4,7 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import LayoutPage from './pages/Layout.Page';
 import LoginPage from './pages/Login.Page';
 import KeywordsContainer from './containers/keywords.Container';
+import AddKeywordContainer from './containers/addKeyword.Container';
 
 const routers = [
     {
@@ -30,11 +31,11 @@ const routers = [
                 exact:true,
                 component:KeywordsContainer
             },
-            // {
-            //     path:'/addKeyword/:id?',
-            //     exact:true,
-            //     component:KeywordContainer
-            // }
+            {
+                path:'/addKeyword/:id?',
+                exact:true,
+                component:AddKeywordContainer
+            }
         ]
     }
 ]

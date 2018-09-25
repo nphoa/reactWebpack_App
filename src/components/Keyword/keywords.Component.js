@@ -54,7 +54,7 @@ class KeywordsComponent extends Component{
                     <td>{item.type}</td>
                     <td>{item.vietnamese}</td>
                     <td>
-                        <Link to ={`/addKeyword/${item.id}`} href='' className='btn btn-warning'>Edit</Link>
+                        <Link to ={`/addKeyword/${item.id}`} className='btn btn-warning' style={{marginRight:'5px'}}>Edit</Link>
                         <a href='' onClick={(e) =>this.onDeleteHandle(item.id,e)} className='btn btn-danger'>Delete</a>
                     </td>
                   </tr>
@@ -67,8 +67,15 @@ class KeywordsComponent extends Component{
         return(
           
                
-      <div>
+          <div className="outer-w3-agile col-xl">
+      
         <h4 className="tittle-w3-agileits mb-4">Keyword for english</h4>
+        <Link to='/addKeyword' class="btn btn-primary" style={{marginBottom:'10px'}}>Add new</Link>
+          {/* Search-from */}
+          <form action="#" method="post" className="form-inline mx-auto search-form">
+                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required />
+                <button className="btn btn-style my-2 my-sm-0" type="submit">Search</button>
+              </form>
         <div className="container-fluid">
           <div className="row">
             <table className="table col-xl mr-xl-3">
@@ -112,7 +119,8 @@ class KeywordsComponent extends Component{
          
           </div>
         </div>
-      </div> 
+        
+        </div> 
           
         )
     }
