@@ -8,7 +8,13 @@ const LoaderHOC = (WrappedComponent) => {
             super(props);
         }
         componentDidMount(){
-            this.props.getKeywords();
+            let objSearch = {
+                keyword:'',
+                type:'',
+                vietnamese:''
+            };
+            this.props.getKeywords(objSearch);
+            this.props.getKeywordTypes();
         }
         render(){
             return(

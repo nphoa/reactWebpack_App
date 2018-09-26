@@ -21,9 +21,10 @@ export const logout = () => {
     }
 }
 
-export const getKeywords = () => {
+export const getKeywords = (dataSearch) => {
     return {
-        type:actionTypes.GET_KEYWORDS
+        type:actionTypes.GET_KEYWORDS,
+        dataSearch:dataSearch
     }
 }
 

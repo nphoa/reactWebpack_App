@@ -53,8 +53,8 @@ class LayoutPage extends Component {
             <HeaderPage/>
             {/*// top-bar */}
             <div className="container-fluid" style={{marginBottom:'50vh'}}>
-              <div className="row">
-                {/* Stats */}
+             
+               
                
                       
                 {this.showContentRoute(this.props.routes)}
@@ -64,7 +64,7 @@ class LayoutPage extends Component {
 
                
 
-              </div>
+              
             </div>
 
 
