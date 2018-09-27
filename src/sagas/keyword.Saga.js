@@ -6,7 +6,7 @@ import callApiNew from '../API/callApi';
 import * as actions from '../actions/index';
 import swal from 'sweetalert';
 
-function* callApi(url, token, method, dataSearch) {
+function* callApi(url, token, method, dataSearch=undefined) {
     let data = null;
     yield fetch(url, {
         method: method,
@@ -27,11 +27,11 @@ function* callApi(url, token, method, dataSearch) {
 }
 
 function* getKeywords(action) {
-    //console.log(action);
+    console.log(action);
     let token = 'Bearer ' + sessionStorage.getItem('token');
     //let fd = new FormData();
     //fd.set('dataSearch',JSON.stringify(action.dataSearch));
-    let result = yield callApi(urls.url_post_keywords, token, 'POST', action.dataSearch);
+    let result = yield callApi(action.dataSearch, token, 'GET');
     //console.log(result);
     if (result.status == 200) {
         console.log(result);

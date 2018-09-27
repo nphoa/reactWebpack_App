@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './LoadingHoC.Component.css';
-
+import * as urls from '../../API/urls';
 
 const LoaderHOC = (WrappedComponent) => {
     return class LoaderHOC extends Component{
@@ -8,12 +8,8 @@ const LoaderHOC = (WrappedComponent) => {
             super(props);
         }
         componentDidMount(){
-            let objSearch = {
-                keyword:'',
-                type:'',
-                vietnamese:''
-            };
-            this.props.getKeywords(objSearch);
+            console.log('zo loading');
+            this.props.getKeywords(urls.url_get_keywords);
             this.props.getKeywordTypes();
         }
         render(){

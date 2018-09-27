@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect} from 'react-router-dom';
 import * as urls from '../../API/urls';
 import callApiAxios from '../../API/callApi';
 import LoaderHOC from '../HoCs/LoadingHoC.Component.js';
@@ -10,8 +10,18 @@ class KeywordsComponent extends Component {
     this.state = {
       keyword:'',
       type:'',
-      vietnamese:''
+      vietnamese:'',
     }
+  }
+  componentDidUpdate(newProps){
+    let searchUrl = urls.url_get_keywords+this.props.location.search;
+   // console.log(newProps);
+    //console.log(this.props);
+    //console.log('1');
+    if(newProps.location.search != this.props.location.search){
+       this.props.getKeywords(searchUrl);
+    }
+    
   }
   callApi(url, token) {
     fetch(url, {
@@ -66,19 +76,35 @@ class KeywordsComponent extends Component {
   }
   onSubmitSearchForm = (event) => {
     event.preventDefault();
-    this.props.getKeywords(this.state);
+    this.setState({
+      search:true
+    });
 
+  }
+  getUrlSearch = () => {
+    let {keyword,vietnamese,type} = this.state;
+    let querySearch = '';
+    if(keyword != ''){
+      querySearch  = querySearch + `?keyword=${keyword}`;
+    }
+    if(type != ''){
+      querySearch  = querySearch + `?type=${type}`;
+    }
+    if(vietnamese != ''){
+      querySearch  = querySearch + `?vietnamese=${vietnamese}`;
+    }
+    return querySearch;
   }
   render() {
     return (
-
+    
       <div className="row">
 
 
 
         <div className="outer-w3-agile col-xl-5" style={{marginBottom:'15px'}}>
           <h4 className="tittle-w3-agileits mb-4">Search</h4>
-          <form onSubmit={this.onSubmitSearchForm} >
+          <form>
             <div className="form-group row">
               <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Keyowrd</label>
               <div className="col-sm-8">
@@ -106,8 +132,8 @@ class KeywordsComponent extends Component {
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style={{ marginRight: '15px' }}>Search</button>
-
+            {/* <button type="submit" class="btn btn-primary" style={{ marginRight: '15px' }}>Search</button> */}
+            <Link  to ={{pathname:'/keywords',search:this.getUrlSearch()}} class="btn btn-primary" style={{ marginRight: '15px' }}>Search</Link>
           </form>
         </div>
 
