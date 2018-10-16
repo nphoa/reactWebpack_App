@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import routers from './../../routes';
 import { Switch, Route, BrowserRouter as Router, HashRouter } from 'react-router-dom';
 
+import FlipComponent from './../FlipComponent';
 
 import '../../public/css/bar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +13,18 @@ import '../../public/js/script';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import WOW from 'wow.js';
 import 'animate.css';
+
+const Greeting = ({name,...props}) => {
+    console.log(name);
+    console.log(props);
+    return( 
+    <div>
+        Hi {obj.name} !!!;
+    </div>
+    )
+   
+}
+
 class App extends Component {
     componentWillMount(){
         new WOW().init(); 
@@ -38,12 +51,13 @@ class App extends Component {
     }
     render() {
         return (
-            <HashRouter>
-                <div>
-                    {this.showContentRoute(routers)}
-                </div>
+            <FlipComponent/>
+            // <HashRouter>
+            //     <div>
+            //         {this.showContentRoute(routers)}
+            //     </div>
 
-            </HashRouter>
+            // </HashRouter>
         )
     }
 
