@@ -1,6 +1,50 @@
 import React, { Component } from 'react';
 import '../Flip.css';
 
+class DemoState extends Component {
+    constructor(props) {
+        super(props);
+        this.state ={
+            count:0
+        }
+       
+    }
+    incrementCount = () => {
+        //this.setState({count: this.state.count + 1});
+        this.setState((state) => {
+            // Important: read `state` instead of `this.state` when updating.
+            return {count: state.count + 1}
+        });
+    }
+    handleSomething = () => {
+        // setTimeout(()=>{
+        //     this.incrementCount();
+        // },1000);
+        // setTimeout(()=>{
+        //     this.incrementCount();
+        // },1000);
+        // setTimeout(()=>{
+        //     this.incrementCount();
+        // },1000);
+        this.incrementCount();
+        this.incrementCount();
+        this.incrementCount();
+       
+        
+    }
+
+    render() {
+        return (
+            <div>
+                <button className='btn btn-danger' onClick={this.handleSomething}>Test</button>
+                {this.state.count}
+            </div>
+            
+        )
+    }
+}
+
+
 var Front = function (props) {
     return (
         <div className="front tile">{props.children}</div>
@@ -16,28 +60,27 @@ var Back = function (props) {
 class Flipper extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            flipped: this.props.flipped
-        }
+       
     }
-    
+
     onFlip = () => {
-        // this.setState({
-        //     flipped: !this.props.flipped
-        // });
-        this.props.getValue(this.props.values,this.props.name);
-        
+
+         this.props.getValue(this.props.index,this.props.values, this.props.name);
+        // if (!result) {
+        //     this.setState({
+        //         flipped: false
+        //     });
+        // }
     }
 
     render() {
         return (
-            <div className={"flipper-container " + this.props.orientation} onClick={this.onFlip} style={{cursor:'pointer'}}>
+            <div className={"flipper-container " + this.props.orientation} onClick={this.onFlip} style={{ cursor: 'pointer' }}>
                 <div className={"flipper" + (this.props.flipped ? " flipped" : "")}>
                     <Front>the front!</Front>
                     <Back {...this.props}>the back!</Back>
-                    
+
                 </div>
-                {this.props.flipped ? 'con ra' : 'con khong ra'}
             </div>
         )
     }
@@ -50,57 +93,103 @@ class FlipComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrayValues: [1, 4, 1, 4],
-            arrayTemp:[],
-            flipped1 : false,
-            flipped2 : false,
-            flipped3 : false,
-            flipped4 : false
+            arrayValues: [
+                {
+                    index : 0,
+                    value:1,
+                    flip:false
+                },
+                {
+                    index : 1,
+                    value:4,
+                    flip:false
+                },
+                {
+                    index :2,
+                    value:1,
+                    flip:false
+                },
+                {
+                    index : 3,
+                    value:4,
+                    flip:false
+                }
+            ],
+            arrayTemp: []
         }
     }
     backFlip = () => {
         return true;
     }
-    getValue = (value,name) => {
-        let {arrayValues,arrayTemp} = this.state;
-        this.setState({
-            [name]:!this.state[name]
-        });
-        console.log(value);
-        
-        let findItem = arrayValues.findIndex((item)=>{
-            return item == value
-        });
-        if(findItem != -1 && arrayTemp.length == 0){
-            //this.state.flipped1 = true;
-            arrayTemp.push(value);
-            //console.log(arrayTemp);
-            //arrayValues.splice(findItem,1);
-        }
-        else{
-            let result = arrayTemp.filter((item1)=>{
-                return item1 == value
-            });
-            console.log(result);
-            if(result.length==0){
-               
-               
-            
+
+    checkCorrect = () =>{
+        if(this.state.arrayTemp.length >= 2){
+            if(this.state.arrayTemp[0].value != this.state.arrayTemp[1].value){
+                this.state.arrayTemp[0].flip = false;
+                this.state.arrayTemp[1].flip = false;
             }
+            this.state.arrayTemp = [];
+            this.setState(this.state);
+            this.checkWinner();
         }
        
+    }
+    checkWinner = () => {
+        console.log('zo winner');
+        let {arrayValues} = this.state;
+        let filterResult = arrayValues.filter((item)=>{
+            return item.flip == false;
+        });
+        if(filterResult.length == 0){
+           alert('You win');
+        }
+    }
+    checkDisabled = (value) => {
+        let {arrayValues} = this.state;
+        let checkDisabled = arrayValues.filter((item)=>{
+            return item.value == value && item.flip == true
+        });
+        if(checkDisabled.length == 2){
+            return false;
+        }
+        return true;
+    }
+    getValue = (index,value, name) => {
+        if(this.checkDisabled(value)){
+            let check = this.state.arrayTemp.filter((item)=>{
+                return item.index == index;
+            });
+            console.log(check);
+            if(check.length == 0){
+                this.state.arrayValues[index].flip = true;
+                this.state.arrayTemp.push(this.state.arrayValues[index]);
+            }else{
+                this.state.arrayValues[index].flip = false;
+                this.state.arrayTemp = [];
+            }
+            
+            //console.log(this.state.arrayTemp);
+            this.setState(this.state);
+            
+            setTimeout(()=>{
+                this.checkCorrect();
+            },1000);
+        }
+        else{
+            alert('Can not clip');
+        }
+        
+
+
     }
     render() {
         return (
             <div>
-                <Flipper  orientation="horizontal" name ='flipped1' flipped={this.state.flipped1} values={this.state.arrayValues[0]} getValue={this.getValue} backFlip = {this.backFlip} />
-                <Flipper  orientation="horizontal" name ='flipped2' flipped={this.state.flipped2} values={this.state.arrayValues[3]} getValue={this.getValue} backFlip = {this.backFlip} />
-                <Flipper  orientation="horizontal" flipped={this.state.flipped3} values={this.state.arrayValues[2]} getValue={this.getValue} />
-                <Flipper  orientation="horizontal" flipped={this.state.flipped4} values={this.state.arrayValues[1]} getValue={this.getValue} />
-                <div className="button-container">
-                    <button onClick={this.flip}>Flip!</button>
-                    <span>{this.state.flipped ? 'ra' : 'khong ra'}</span>
-                </div>
+                {/* <Flipper orientation="horizontal" index={this.state.arrayValues[0].index}  flipped={this.state.arrayValues[0].flip} values={this.state.arrayValues[0].value} getValue={this.getValue} />
+                <Flipper orientation="horizontal" index={this.state.arrayValues[1].index}  flipped={this.state.arrayValues[1].flip} values={this.state.arrayValues[1].value} getValue={this.getValue} />
+                <Flipper orientation="horizontal" index={this.state.arrayValues[2].index}  flipped={this.state.arrayValues[2].flip} values={this.state.arrayValues[2].value} getValue={this.getValue} />
+                <Flipper orientation="horizontal" index={this.state.arrayValues[3].index}  flipped={this.state.arrayValues[3].flip} values={this.state.arrayValues[3].value} getValue={this.getValue} /> */}
+           <DemoState/>
             </div>
         )
     }
