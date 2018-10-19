@@ -14,13 +14,16 @@ class KeywordsComponent extends Component {
     }
   }
   componentDidUpdate(newProps){
-    let searchUrl = urls.url_get_keywords+this.props.location.search;
-   // console.log(newProps);
-    //console.log(this.props);
-    //console.log('1');
-    if(newProps.location.search != this.props.location.search){
-       this.props.getKeywords(searchUrl);
-    }
+  //   let searchUrl = urls.url_get_keywords+this.props.location.search;
+  //  // console.log(newProps);
+  //   //console.log(this.props);
+  //   //console.log('1');
+  //   if(newProps.location.search != this.props.location.search){
+  //      this.props.getKeywords(searchUrl);
+  //   }
+    
+  }
+  componentDidMount(){
     
   }
   callApi(url, token) {

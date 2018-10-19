@@ -14,6 +14,7 @@ class LayoutPage extends Component {
   constructor(props){
     super(props);
   }
+ 
   showContentRoute = (routes) =>{
     
     var result = null;
@@ -35,6 +36,7 @@ class LayoutPage extends Component {
     return result;
   }
   render() {
+    console.log('layout');
     const {isLogin} = this.props;
     if(!isLogin){
       return(
@@ -42,6 +44,7 @@ class LayoutPage extends Component {
       )
     }
     return (
+     
       <div>
        
         <div className="wrapper">

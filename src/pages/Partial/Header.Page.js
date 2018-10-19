@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/index';
+import {Link, NavLink} from 'react-router-dom';
 class HeaderPage extends Component {
     constructor(props){
       super(props);
@@ -30,9 +31,11 @@ class HeaderPage extends Component {
       
     }
     render(){
+      console.log('render header');
         let userInfo =(sessionStorage.getItem('userInfo')) ? JSON.parse(sessionStorage.getItem('userInfo')) : '';
         return(
             <nav className="navbar navbar-default mb-xl-5 mb-4">
+             <Link to={'/homepage'}>Homepage</Link>
             <div className="container-fluid">
               <div className="navbar-header">
                 <button type="button" id="sidebarCollapse" onClick={this.toggleMenu} className="btn btn-info navbar-btn">

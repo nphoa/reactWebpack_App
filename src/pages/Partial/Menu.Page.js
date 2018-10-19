@@ -1,12 +1,46 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-
+import {Link, NavLink} from 'react-router-dom';
+import * as urls from '../../API/urls';
+import axios from '../../API/callApi';
 
 
 
 class MenuPage extends Component {
+    constructor(props){
+      super(props);
+      this.state={
+        sidebar:[]
+      }
+    }
+ 
+    componentDidMount(){
+      this.getSidebar();
+    }
+   
+    getSidebar = () => {
+      let token = 'Bearer '+sessionStorage.getItem('token');
+      axios(urls.url_get_sidebar,'GET',null,token).then((res)=>{
+        if(res.data.status == 200){
+          this.setState({
+            sidebar:res.data.data
+          });
+        }
+      });
+    }
+    generateSidebar = (sidebars) => {
+      let result = null;
+      result = sidebars.map((item,index)=>{
+          return (
+            <li key={index}>
+            {/* <Link to={item.url}>{item.name}</Link> */}
+            <NavLink pure to={item.url}>{item.name}</NavLink>
+            </li>
+          )
+      });
+      return result;
+    }
     render() {
-
+        console.log('menu');
         return (
             <nav id="sidebar">
             <div className="sidebar-header">
@@ -30,9 +64,12 @@ class MenuPage extends Component {
                       <i className="fas fa-angle-down fa-pull-right" />
                 </a>
                 <ul className="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                    <Link to='/keywords'>Keywords</Link>
-                  </li>
+                 
+                   
+                    {
+                      this.generateSidebar(this.state.sidebar)
+                    }
+                  
                 </ul>
               </li>
              

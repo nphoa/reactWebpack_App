@@ -10,7 +10,7 @@ const LoaderHOC = (WrappedComponent) => {
         componentDidMount(){
             console.log('zo loading');
             this.props.getKeywords(urls.url_get_keywords);
-            this.props.getKeywordTypes();
+            //this.props.getKeywordTypes();
         }
         render(){
             return(

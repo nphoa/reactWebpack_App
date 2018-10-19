@@ -14,16 +14,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import WOW from 'wow.js';
 import 'animate.css';
 
-const Greeting = ({name,...props}) => {
-    console.log(name);
-    console.log(props);
-    return( 
-    <div>
-        Hi {obj.name} !!!;
-    </div>
-    )
-   
-}
+
 
 class App extends Component {
     componentWillMount(){
@@ -50,14 +41,15 @@ class App extends Component {
         return result;
     }
     render() {
+        console.log('app.js');
         return (
-            <FlipComponent/>
-            // <HashRouter>
-            //     <div>
-            //         {this.showContentRoute(routers)}
-            //     </div>
+            // <FlipComponent/>
+            <Router>
+                <div>
+                    {this.showContentRoute(routers)}
+                </div>
 
-            // </HashRouter>
+            </Router>
         )
     }
 
