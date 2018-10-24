@@ -9,12 +9,10 @@ import AddKeywordContainer from './containers/addKeyword.Container';
 const routers = [
     {
         path:'/login',
-        exact:true,
         component:LoginPage
     },
     {
         path:'/register',
-        exact:true,
         //component:RegisterComponent
     },
     {
@@ -23,17 +21,14 @@ const routers = [
         routes:[
             {
                 path:'/homepage',
-                exact:true,
                 component:HomePage
             },
             {
                 path:'/keywords',
-                exact:true,
                 component:KeywordsContainer
             },
             {
                 path:'/addKeyword/:id?',
-                exact:true,
                 component:AddKeywordContainer
             }
         ]

@@ -17,7 +17,7 @@ const
 const devServer = {
   open: true,
   //contentBase        : manifest.IS_PRODUCTION ? manifest.paths.build : manifest.paths.src,
-  //historyApiFallback : true,
+  historyApiFallback : true,
   //port               : manifest.IS_PRODUCTION ? 3001 : 3000,
   //compress           : manifest.IS_PRODUCTION,
   //inline             : !manifest.IS_PRODUCTION,

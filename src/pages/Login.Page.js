@@ -27,7 +27,7 @@ class LoginPage extends Component {
     const { isLogin } = this.props;
     if (isLogin) {
       return (
-        <Redirect push to='/' />
+        <Redirect to='/' />
       )
     }
     return (

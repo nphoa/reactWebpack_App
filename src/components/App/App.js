@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import routers from './../../routes';
-import { Switch, Route, BrowserRouter as Router, HashRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, HashRouter } from 'react-router-dom';
 
-import FlipComponent from './../FlipComponent';
 
 import '../../public/css/bar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,8 +16,8 @@ import 'animate.css';
 
 
 class App extends Component {
-    componentWillMount(){
-        new WOW().init(); 
+    componentWillMount() {
+        new WOW().init();
     }
     showContentRoute = (routes) => {
 
@@ -29,7 +28,6 @@ class App extends Component {
                     <Route
                         key={index}
                         path={route.path}
-                        exact={route.exact}
                         render={props => (
                             // pass the sub-routes down to keep nesting
                             <route.component {...props} routes={route.routes} />
@@ -41,18 +39,18 @@ class App extends Component {
         return result;
     }
     render() {
-        console.log('app.js');
         return (
             // <FlipComponent/>
-            <Router>
-                <div>
-                    {this.showContentRoute(routers)}
-                </div>
-
-            </Router>
+            <BrowserRouter>
+                    <Switch>
+                        {this.showContentRoute(routers)}
+                    </Switch>
+            </BrowserRouter>
         )
     }
 
 }
 
+
 export default App;
+

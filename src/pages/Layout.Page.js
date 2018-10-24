@@ -24,7 +24,7 @@ class LayoutPage extends Component {
                 <Route
                     key = {index} 
                     path={route.path}
-                    exact={route.exact}
+                   
                     render={props => (
                       // pass the sub-routes down to keep nesting
                       <route.component {...props} routes={route.routes} />
@@ -36,11 +36,12 @@ class LayoutPage extends Component {
     return result;
   }
   render() {
-    console.log('layout');
+   
     const {isLogin} = this.props;
+      console.log(isLogin);
     if(!isLogin){
       return(
-        <Redirect to ='/login'/>  
+        <Redirect push to ='/login'/>  
       )
     }
     return (
