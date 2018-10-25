@@ -24,7 +24,7 @@ class KeywordsComponent extends Component {
     
   }
   componentDidMount(){
-    
+    this.props.getKeywordTypes();    
   }
   callApi(url, token) {
     fetch(url, {
@@ -136,7 +136,7 @@ class KeywordsComponent extends Component {
             </div>
 
             {/* <button type="submit" class="btn btn-primary" style={{ marginRight: '15px' }}>Search</button> */}
-            <Link  to ={{pathname:'/keywords',search:this.getUrlSearch()}} class="btn btn-primary" style={{ marginRight: '15px' }}>Search</Link>
+            <Link  to ={{pathname:'/keywords',search:this.getUrlSearch()}} className="btn btn-primary" style={{ marginRight: '15px' }}>Search</Link>
           </form>
         </div>
 
@@ -145,7 +145,7 @@ class KeywordsComponent extends Component {
         <div className="outer-w3-agile col-xl-8">
 
           <h4 className="tittle-w3-agileits mb-4">Keyword for english</h4>
-          <Link to='/addKeyword' class="btn btn-primary" style={{ marginBottom: '10px' }}>Add new</Link>
+          <Link to='/addKeyword' className="btn btn-primary" style={{ marginBottom: '10px' }}>Add new</Link>
 
           <div className="container-fluid">
             <div className="row">

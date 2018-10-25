@@ -31,7 +31,7 @@ module.exports = {
   entry,
   output: {
     path: manifest.paths.bundle,
-    publicPath: '',
+    publicPath: '/',
     filename: manifest.outputFiles.bundle,
   },
   optimization: optimization,

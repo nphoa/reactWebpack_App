@@ -20,12 +20,10 @@ class LoginPage extends Component {
   }
   onSubmitForm = (event) => {
     event.preventDefault();
-    console.log(this.state);
     this.props.login(this.state);
   }
   render() {
-    const { isLogin } = this.props;
-    if (isLogin) {
+    if (this.props.isLogin) {
       return (
         <Redirect to='/' />
       )

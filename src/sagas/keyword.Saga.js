@@ -31,12 +31,12 @@ function* getKeywords(action) {
     let token = 'Bearer ' + sessionStorage.getItem('token');
     //let fd = new FormData();
     //fd.set('dataSearch',JSON.stringify(action.dataSearch));
-    let result = yield callApi(action.dataSearch, token, 'GET');
+    let result = yield callApiNew(urls.url_get_keywords,'GET',null,token);
     //console.log(result);
     if (result.status == 200) {
         console.log(result);
         yield delay(1000);
-        yield put(actions.getKeywords_success(result.data));
+        yield put(actions.getKeywords_success(result.data.data));
     }
 
 }
@@ -46,7 +46,7 @@ export function* watchGetKeywords() {
     yield takeEvery(types.GET_KEYWORDS, getKeywords);
 }
 
-function* getKeywordTypes(action) {
+function* getKeywordTypes(action) { 
     let token = 'Bearer '+sessionStorage.getItem('token');
     let result = yield callApi(urls.url_get_keyword_types,token,'GET');
     if(result.status==200){

@@ -7,7 +7,12 @@ var initialState  = {
     keywordEditing:{
         id:0
     },
-    keywordTypes:[]
+    keywordTypes:[],
+    searchInfo:{
+        keyword:'',
+        type:1,
+        vietnamese:''
+    }
 };
 
 var myReducer = (state = initialState,action) => {

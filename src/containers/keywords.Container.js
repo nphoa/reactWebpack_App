@@ -7,14 +7,14 @@ import * as actions from '../actions/index';
 const mapStateToProps = (state) => {
   return{
     keywordTypes:state.keywordReducer.keywordTypes,
-    keywords:state.keywordReducer.keywords
-    
+    keywords:state.keywordReducer.keywords,
+    searchInfo:state.keywordReducer.searchInfo
   }
 }
 const mapDispatchToProps = (dispatch,props) => {
     return {
-      getKeywords:(dataSearch) => {
-        dispatch(actions.getKeywords(dataSearch))
+      getKeywords:() => {
+        dispatch(actions.getKeywords())
       },
       getKeywordTypes:() => {
         dispatch(actions.getKeywordTypes())

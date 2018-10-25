@@ -33,14 +33,13 @@ class MenuPage extends Component {
           return (
             <li key={index}>
             {/* <Link to={item.url}>{item.name}</Link> */}
-            <NavLink pure to={item.url}>{item.name}</NavLink>
+            <Link to={item.url}>{item.name}</Link>
             </li>
           )
       });
       return result;
     }
     render() {
-        console.log('menu');
         return (
             <nav id="sidebar">
             <div className="sidebar-header">

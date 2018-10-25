@@ -31,7 +31,6 @@ class HeaderPage extends Component {
       
     }
     render(){
-      console.log('render header');
         let userInfo =(sessionStorage.getItem('userInfo')) ? JSON.parse(sessionStorage.getItem('userInfo')) : '';
         return(
             <nav className="navbar navbar-default mb-xl-5 mb-4">

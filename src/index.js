@@ -7,12 +7,14 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'; 
 import appSaga from '../src/sagas/index.Saga';
 
+
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-    appReducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware(sagaMiddleware)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(appReducers,
+    //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 sagaMiddleware.run(appSaga);
 
