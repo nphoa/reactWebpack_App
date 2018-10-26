@@ -1,24 +1,30 @@
 import * as types from '../constants/ActionTypes';
 
 var initialState  = {
-    keywords:[
-        
-    ],
-    keywordEditing:{
-        id:0
-    },
+    keywords:[],
+    keywordEditing:{id:0},
     keywordTypes:[],
     searchInfo:{
         keyword:'',
         type:1,
         vietnamese:''
+    },
+    keyword:{
+        list:[],
+        pagination:{
+            currentPage:1,
+            totalItem:0
+        }
     }
+    
 };
 
 var myReducer = (state = initialState,action) => {
 	switch (action.type) {
         case types.GET_KEYWORDS_SUCCESS:
             state.keywords = action.keywords;
+            state.keyword.list = action.keywords;
+            
             return {...state};
             break;
         case types.GET_KEYWORD_TYPES_SUCCESS:

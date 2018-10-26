@@ -24,7 +24,7 @@ const routers = [
                 component:HomePage
             },
             {
-                path:'/keyword/keywords',
+                path:'/keyword/keywords/:page',
                 component:KeywordsContainer
             },
             {

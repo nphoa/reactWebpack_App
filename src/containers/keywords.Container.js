@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch,props) => {
     return {
-      getKeywords:() => {
-        dispatch(actions.getKeywords())
+      getKeywords:(data=null,page) => {
+        dispatch(actions.getKeywords(data,page))
       },
       getKeywordTypes:() => {
         dispatch(actions.getKeywordTypes())

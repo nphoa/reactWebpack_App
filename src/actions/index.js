@@ -21,10 +21,11 @@ export const logout = () => {
     }
 }
 
-export const getKeywords = (dataSearch) => {
+export const getKeywords = (dataSearch = null,page) => {
     return {
-        type:actionTypes.GET_KEYWORDS,
-        dataSearch:dataSearch
+        dataSearch:dataSearch,
+        page:page,
+        type:actionTypes.GET_KEYWORDS
     }
 }
 
@@ -60,4 +61,8 @@ export const freshKeyword = () => {
         type:actionTypes.FRESH_KEYWORD
       
     }
+}
+
+export const searchKeyword = () => {
+
 }

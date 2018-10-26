@@ -29,10 +29,18 @@ function* callApi(url, token, method, dataSearch=undefined) {
 function* getKeywords(action) {
     console.log(action);
     let token = 'Bearer ' + sessionStorage.getItem('token');
+    let result = null;
+    if(action.dataSearch != null){
+        let fd = new FormData();
+        fd.set('dataSearch',JSON.stringify(action.dataSearch));
+        result = yield callApiNew(urls.url_post_searchKeyword,'POST',fd,token);
+    }else{
+        result = yield callApiNew(`${urls.url_get_keywords}?page=${action.page}`,'GET',null,token);
+    }
     //let fd = new FormData();
     //fd.set('dataSearch',JSON.stringify(action.dataSearch));
-    let result = yield callApiNew(urls.url_get_keywords,'GET',null,token);
-    //console.log(result);
+    // let result = yield callApiNew(urls.url_get_keywords,'GET',null,token);
+    // //console.log(result);
     if (result.status == 200) {
         console.log(result);
         yield delay(1000);

@@ -8,7 +8,8 @@ const LoaderHOC = (WrappedComponent) => {
             super(props);
         }
         componentDidMount(){
-            this.props.getKeywords();
+            console.log(this.props.match.params.page);
+            this.props.getKeywords(null,this.props.match.params.page);
             
         }
         render(){

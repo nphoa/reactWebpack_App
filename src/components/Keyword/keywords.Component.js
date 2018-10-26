@@ -13,6 +13,7 @@ class KeywordsComponent extends Component {
       vietnamese:'',
     }
   }
+
   componentDidUpdate(newProps){
   //   let searchUrl = urls.url_get_keywords+this.props.location.search;
   //  // console.log(newProps);
@@ -79,9 +80,7 @@ class KeywordsComponent extends Component {
   }
   onSubmitSearchForm = (event) => {
     event.preventDefault();
-    this.setState({
-      search:true
-    });
+    this.props.getKeywords(this.state);
 
   }
   getUrlSearch = () => {
@@ -107,7 +106,7 @@ class KeywordsComponent extends Component {
 
         <div className="outer-w3-agile col-xl-5" style={{marginBottom:'15px'}}>
           <h4 className="tittle-w3-agileits mb-4">Search</h4>
-          <form>
+          <form onSubmit={this.onSubmitSearchForm}>
             <div className="form-group row">
               <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Keyowrd</label>
               <div className="col-sm-8">
@@ -135,8 +134,8 @@ class KeywordsComponent extends Component {
               </div>
             </div>
 
-            {/* <button type="submit" class="btn btn-primary" style={{ marginRight: '15px' }}>Search</button> */}
-            <Link  to ={{pathname:'/keywords',search:this.getUrlSearch()}} className="btn btn-primary" style={{ marginRight: '15px' }}>Search</Link>
+            <button type="submit" class="btn btn-primary" style={{ marginRight: '15px' }}>Search</button>
+    
           </form>
         </div>
 
