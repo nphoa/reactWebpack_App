@@ -32,7 +32,7 @@ export const getKeywords = (dataSearch = null,page) => {
 export const getKeywords_success = (data) => {
     return {
         type:actionTypes.GET_KEYWORDS_SUCCESS,
-        keywords:data
+        keyword:data
     }
 }
 

@@ -7,7 +7,8 @@ import * as actions from '../actions/index';
 const mapStateToProps = (state) => {
   return{
     keywordTypes:state.keywordReducer.keywordTypes,
-    keywords:state.keywordReducer.keywords,
+    list:state.keywordReducer.list,
+    pager:state.keywordReducer.pager,
     searchInfo:state.keywordReducer.searchInfo
   }
 }

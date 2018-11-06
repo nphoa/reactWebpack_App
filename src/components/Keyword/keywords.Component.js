@@ -3,7 +3,8 @@ import { Link,Redirect} from 'react-router-dom';
 import * as urls from '../../API/urls';
 import callApiAxios from '../../API/callApi';
 import LoaderHOC from '../HoCs/LoadingHoC.Component.js';
-
+import Pagination from '../Pagination.Component';
+import { delay } from 'redux-saga';
 class KeywordsComponent extends Component {
   constructor(props) {
     super(props);
@@ -13,19 +14,37 @@ class KeywordsComponent extends Component {
       vietnamese:'',
     }
   }
-
-  componentDidUpdate(newProps){
-  //   let searchUrl = urls.url_get_keywords+this.props.location.search;
-  //  // console.log(newProps);
-  //   //console.log(this.props);
-  //   //console.log('1');
-  //   if(newProps.location.search != this.props.location.search){
-  //      this.props.getKeywords(searchUrl);
-  //   }
+  componentWillReceiveProps = (prevProps,prevState)=> {
+    if(this.props != prevProps ){
+      console.group('componentWillReceiveProps');
+      console.log('Hàm này thực hiện liên tục mỗi khi props thay đổi');
+      console.groupEnd();
+    }
     
   }
+  componentWillUpdate(){
+    console.group('componentWillUpdate');
+      console.log('hàm này sẽ chạy khi có dấu hiệu update xảy ra và xảy ra trước khi render view');
+    console.groupEnd();
+  }
+  componentDidUpdate =(prevProps, prevState)=>{
+    console.group('componentDidUpdate')
+      console.log('hàm này sẽ chạy khi có dấu hiệu update xảy ra và xảy ra sau khi view đã render');
+      console.log(this.props.match.url);
+      console.log(prevProps.match.url);
+      if(this.props.match.url != prevProps.match.url){
+        console.log('hop le và thực hiện side effect');
+        this.props.getKeywords(null,this.props.match.params.page);
+      }
+    console.groupEnd();
+    
+  }
+
   componentDidMount(){
-    this.props.getKeywordTypes();    
+    console.log('componentDidMount');
+    this.props.getKeywordTypes();   
+    this.props.getKeywords(null,this.props.match.params.page); 
+    
   }
   callApi(url, token) {
     fetch(url, {
@@ -97,7 +116,27 @@ class KeywordsComponent extends Component {
     }
     return querySearch;
   }
+  mapPager(pages){
+    let result = null;
+    if(pages!= undefined || pages!= null){
+        result = pages.map((item) =>{
+          return (
+            <div key={item}>{item}</div>
+
+          )
+        })
+    }
+    return result;
+  }
+  onChangePage(pageOfItems) {
+    // update state with new page of items
+    this.setState({ pageOfItems: pageOfItems });
+}
   render() {
+    console.group('render view');
+      console.log('render view');
+      console.log(this.props.list);
+    console.groupEnd('End');
     return (
     
       <div className="row">
@@ -134,7 +173,7 @@ class KeywordsComponent extends Component {
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style={{ marginRight: '15px' }}>Search</button>
+            <button type="submit" className="btn btn-primary" style={{ marginRight: '15px' }}>Search</button>
     
           </form>
         </div>
@@ -159,10 +198,19 @@ class KeywordsComponent extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.showContentKeyword(this.props.keywords)}
+                  {this.showContentKeyword(this.props.list)}
                 </tbody>
               </table>
+                   
+              
 
+                 <div className="container">
+                <div className="text-center">
+                    <h1>React - Pagination Example with logic like Google</h1>
+
+                    <Pagination items={this.props.list} pager = {this.props.pager} onChangePage={this.onChangePage} />
+                </div>
+            </div> 
             </div>
           </div>
 
@@ -183,4 +231,4 @@ class KeywordsComponent extends Component {
   }
 }
 
-export default LoaderHOC(KeywordsComponent)
+export default KeywordsComponent

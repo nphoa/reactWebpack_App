@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 const defaultProps = {
     initialPage: 1,
     pageSize: 10
@@ -68,7 +68,8 @@ class PaginationComponent extends Component {
 
         // create an array of pages to ng-repeat in the pager control
         var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
-        console.log(pages);
+        var pages1 = [...Array((endPage + 1) - startPage).keys()];
+        console.log(endPage,startPage,pages);
         // return object with all pager properties required by the view
         return {
             totalItems: totalItems,
@@ -83,30 +84,32 @@ class PaginationComponent extends Component {
         };
     }
     render() {
-        let pager = this.state.pager;
-
+        let pager = this.props.pager;
+         //console.log(pager);   
         if (!pager.pages || pager.pages.length <= 1) {
             // don't display pager if there is only 1 page
             return null;
         }
         return (
             <ul className="pagination">
-                <li className={`page-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(1)}>First</a>
+                <li className={`page-item ${pager.currentPage == 1 ? 'disabled' : ''}`}>
+                    <Link className="page-link" to={`/keyword/keywords/1`}>First</Link>
                 </li>
-                <li className={`page-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(pager.currentPage - 1)}>Previous</a>
+                <li className={`page-item ${pager.currentPage == 1 ? 'disabled' : ''}`}>
+                    <Link className="page-link" to={`/keyword/keywords/${parseInt(pager.currentPage) - 1}`}>Previous</Link>
                 </li>
                 {pager.pages.map((page, index) =>
-                    <li key={index} className={`page-item ${pager.currentPage === page ? 'active' : ''}`}>
-                        <a className="page-link" onClick={() => this.setPage(page)}>{page}</a>
+                    <li key={index} className={`page-item ${pager.currentPage == page ? 'active' : ''}`}>
+                        {/* <a className="page-link" onClick={() => this.setPage(page)}>{page}</a> */}
+                        <Link className="page-link" to={`/keyword/keywords/${page}`}>{page}</Link>
+
                     </li>
                 )}
-                <li className={`page-item ${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(pager.currentPage + 1)}>Next</a>
+                <li className={`page-item ${pager.currentPage == pager.totalPages ? 'disabled' : ''}`}>
+                    <Link className="page-link" to={`/keyword/keywords/${parseInt(pager.currentPage) + 1}`}>Next</Link>
                 </li>
-                <li className={`page-item ${pager.currentPage === pager.totalPages ? 'disabled' : ''}` }>
-                    <a  className="page-link" onClick={() => this.setPage(pager.totalPages)}>Last</a>
+                <li className={`page-item ${pager.currentPage == pager.totalPages ? 'disabled' : ''}` }>
+                    <Link className="page-link" to={`/keyword/keywords/${pager.totalPages}`}>Last</Link>
                 </li>
             </ul>
         )

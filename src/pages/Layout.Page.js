@@ -38,7 +38,7 @@ class LayoutPage extends Component {
   render() {
    
     const {isLogin} = this.props;
-      console.log(isLogin);
+    
     if(!isLogin){
       return(
         <Redirect push to ='/login'/>  
