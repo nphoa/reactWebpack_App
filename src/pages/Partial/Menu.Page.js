@@ -33,7 +33,8 @@ class MenuPage extends Component {
           if(item.name == 'Keyword'){
             return (
               <li key={index}>
-                  <Link to={`${item.url}/1`}>{item.name}</Link>
+                  {/* <Link to={`${item.url}/1`}>{item.name}</Link> */}
+                  <Link to={{pathname:`${item.url}`,search:`?page=1`}}>{item.name}</Link>
               </li>
             )
           }

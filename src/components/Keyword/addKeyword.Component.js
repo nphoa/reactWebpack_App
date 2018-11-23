@@ -15,13 +15,11 @@ class AddKeywordComponent extends Component {
 
         }
     }
-    componentWillMount() {
+    componentWillMount() {}
+    componentDidMount() {
         if (this.props.match.params.id !== undefined) {
             this.props.getKeywordById(this.props.match.params.id);
         }
-    }
-    componentDidMount() {
-
         this.props.getKeywordTypes();
     }
     renderField = ({ input, type, meta: { touched, error, warning } }) => {
@@ -50,6 +48,7 @@ class AddKeywordComponent extends Component {
         let fd = new FormData();
         fd.set('keyword', JSON.stringify(values));
         callApi(urls.url_post_saveKeyword, 'POST', fd, token).then((res) => {
+            console.log(res);
             if (res.data.status == 200) {
                 this.setState({
                     redirectUrl: true
@@ -57,7 +56,7 @@ class AddKeywordComponent extends Component {
                 this.props.freshKeyword();
             }
         }).catch((error) => {
-            alert('Error');
+            alert(error);
         })
 
     }
@@ -74,7 +73,7 @@ class AddKeywordComponent extends Component {
         const { pristine, reset, submitting, valid, handleSubmit } = this.props;
         if (this.state.redirectUrl) {
             return (
-                <Redirect to='/keywords' />
+                <Redirect to = {{pathname:'/keyword/keywords',search:'?page=1'}} />
             )
         }
         return (
@@ -102,7 +101,7 @@ class AddKeywordComponent extends Component {
                     </div>
 
                     <button type="submit" class="btn btn-primary" style={{marginRight:'15px'}}>Save change</button>
-                    <Link to='/keywords' class="btn btn-danger" onClick={this.props.freshKeyword}>Back</Link>
+                    <Link to= {{pathname:'/keyword/keywords',search:'?page=1'}}class="btn btn-danger" onClick={this.props.freshKeyword}>Back</Link>
                 </form>
             </div>
 

@@ -13,7 +13,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import WOW from 'wow.js';
 import 'animate.css';
 
-
+import LifecycleComponent from   '../Lifecycle.Component';
 
 class App extends Component {
     componentWillMount() {
@@ -40,7 +40,7 @@ class App extends Component {
     }
     render() {
         return (
-            // <FlipComponent/>
+            // <LifecycleComponent/>
             <BrowserRouter>
                     <Switch>
                         {this.showContentRoute(routers)}

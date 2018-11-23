@@ -63,6 +63,15 @@ export const freshKeyword = () => {
     }
 }
 
-export const searchKeyword = () => {
+export const getUsers = () => {
+    return {
+        type:actionTypes.GET_USERS
+    }
+}
 
+export const getUsers_success = (users) => {
+    return {
+        type:actionTypes.GET_USERS_SUCCESS,
+        users:users
+    }
 }

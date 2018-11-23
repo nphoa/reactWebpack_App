@@ -5,13 +5,11 @@ import callApiAxios from '../../API/callApi';
 import LoaderHOC from '../HoCs/LoadingHoC.Component.js';
 import Pagination from '../Pagination.Component';
 import { delay } from 'redux-saga';
-class KeywordsComponent extends Component {
+class UsersComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword:'',
-      type:'',
-      vietnamese:'',
+     
     }
   }
   componentWillMount() {
@@ -37,18 +35,18 @@ class KeywordsComponent extends Component {
       console.log(prevProps.match.url);
       if(this.props.location.search != prevProps.location.search){
         console.log('hop le và thực hiện side effect');
-        let idPage = this.props.location.search.substr(6,1);   
-        this.props.getKeywords(null,idPage);
+        //let idPage = this.props.location.search.substr(6,1);   
+        //this.props.getKeywords(null,idPage);
       }
     console.groupEnd();
     
   }
 
   componentDidMount(){
-    console.log('componentDidMount');
-    this.props.getKeywordTypes();
-    let idPage = this.props.location.search.substr(6,1);   
-    this.props.getKeywords(null,idPage); 
+   // console.log('componentDidMount');
+   // this.props.getKeywordTypes();
+   // let idPage = this.props.location.search.substr(6,1);   
+    //this.props.getKeywords(null,idPage); 
     
   }
   callApi(url, token) {
@@ -79,7 +77,7 @@ class KeywordsComponent extends Component {
       }
     });
   }
-  showContentKeyword = (keywords) => {
+  showContentUsers = (users) => {
     let result = null;
     if (keywords != null && keywords.length > 0) {
       result = keywords.map((item, index) => {
@@ -98,52 +96,9 @@ class KeywordsComponent extends Component {
     }
     return result;
   }
-  onChangeEventForm = (e) => {
-      this.setState({
-        [e.target.name] : e.target.value
-      });
-   
+  
+ 
 
-  }
-  onSubmitSearchForm = (event) => {
-    event.preventDefault();
-    let querySearch = this.getUrlSearch();
-    console.log(querySearch);
-    console.log(this.props);
-    this.props.getKeywords(this.state);
-
-  }
-  getUrlSearch = () => {
-    let {keyword,vietnamese,type} = this.state;
-    let querySearch = this.props.location.search;
-    if(keyword != ''){
-      querySearch  = querySearch + `?keyword=${keyword}`;
-    }
-    if(type != ''){
-      querySearch  = querySearch + `?type=${type}`;
-    }
-    if(vietnamese != ''){
-      querySearch  = querySearch + `?vietnamese=${vietnamese}`;
-    }
-    console.log(querySearch);
-    return querySearch;
-  }
-  mapPager(pages){
-    let result = null;
-    if(pages!= undefined || pages!= null){
-        result = pages.map((item) =>{
-          return (
-            <div key={item}>{item}</div>
-
-          )
-        })
-    }
-    return result;
-  }
-//   onChangePage(pageOfItems) {
-//     // update state with new page of items
-//     this.setState({ pageOfItems: pageOfItems });
-// }
   render() {
     console.group('render view');
       console.log('render view');
@@ -155,46 +110,12 @@ class KeywordsComponent extends Component {
 
 
 
-        <div className="outer-w3-agile col-xl-5" style={{marginBottom:'15px'}}>
-          <h4 className="tittle-w3-agileits mb-4">Search</h4>
-          <form onSubmit={this.onSubmitSearchForm}>
-            <div className="form-group row">
-              <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Keyowrd</label>
-              <div className="col-sm-8">
-                <input type="text" className="form-control" name="keyword" onChange={this.onChangeEventForm} />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Type</label>
-              <div className="col-sm-8">
-                <select className="form-control" name="type" onChange={this.onChangeEventForm}>
-                   {
-                     this.props.keywordTypes.map((item,index)=>{
-                       return(
-                         <option key={index} value={item.id}>{item.type}</option>
-                       )
-                     })
-                   }
-                </select>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Vietnamese</label>
-              <div className="col-sm-8">
-                <textarea type="text" className="form-control"  name="vietnamese"onChange={this.onChangeEventForm}/>
-              </div>
-            </div>
-
-            <button type="submit" className="btn btn-primary" style={{ marginRight: '15px' }}>Search</button>
-            {/* <Link to={{pathname:`/keyword/keywords`, search:`${this.getUrlSearch()}`}} className="btn btn-primary" style={{ marginBottom: '15px' }}>Search</Link> */}
-          </form>
-        </div>
-
+      
 
 
         <div className="outer-w3-agile col-xl-8">
 
-          <h4 className="tittle-w3-agileits mb-4">Keyword for english</h4>
+          <h4 className="tittle-w3-agileits mb-4">Users</h4>
           <Link to='/addKeyword' className="btn btn-primary" style={{ marginBottom: '10px' }}>Add new</Link>
 
           <div className="container-fluid">
@@ -203,14 +124,13 @@ class KeywordsComponent extends Component {
               <table className="table col-xl mr-xl-3">
                 <thead>
                   <tr>
-                    <th scope="col">Keyword</th>
-                    <th scope="col">keywordType</th>
-                    <th scope="col">Viernames</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {this.showContentKeyword(this.props.list)}
+                
                 </tbody>
               </table>
                    
@@ -220,7 +140,7 @@ class KeywordsComponent extends Component {
                 <div className="text-center">
                     <h1>React - Pagination Example with logic like Google</h1>
 
-                    <Pagination items={this.props.list} pager = {this.props.pager}  />
+               
                 </div>
             </div> 
             </div>
@@ -243,4 +163,4 @@ class KeywordsComponent extends Component {
   }
 }
 
-export default KeywordsComponent
+export default UsersComponent

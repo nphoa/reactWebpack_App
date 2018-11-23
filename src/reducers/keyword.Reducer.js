@@ -8,9 +8,8 @@ var initialState  = {
         type:1,
         vietnamese:''
     },
-    
-        list:[],
-        pager:{}
+    list:[],
+    pager:{}
     
     
 };
@@ -28,7 +27,7 @@ var myReducer = (state = initialState,action) => {
             return {...state};
             break;
         case types.GET_KEYWORD_BY_ID:
-            let item = state.keywords.find((item)=>{
+            let item = state.list.find((item)=>{
                 return item.id ==action.id;
             })
             state.keywordEditing = item;
